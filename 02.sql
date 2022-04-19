@@ -12,8 +12,6 @@ INSERT INTO `address_book` (`sid`, `name`, `moblie`, `birthday`, `email`, `addre
 DELETE FROM `address_book` WHERE 0 -- DELETE FROM 刪除 ; 0代表false
 
 
-c
-
 
 UPDATE
 
