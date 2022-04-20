@@ -17,6 +17,7 @@ SELECT * FROM `address_book` ORDER BY `name` DESC; -- 降冪
 SELECT * FROM `address_book` ORDER BY `name` DESC, `sid` DESC;
 
 
+DELETE FROM `address_book` WHERE 0 -- DELETE FROM 刪除 ; 0代表false
 
 
 

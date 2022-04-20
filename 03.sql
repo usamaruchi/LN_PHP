@@ -1,19 +1,38 @@
 
-SELECT * FROM `products` JOIN `categories`;
+SELECT 1+5;
 
-SELECT * FROM `products` JOIN `categories`
-    ON `products`.`category_sid`=`categories`.sid;
+SELECT RAND();  -- 亂數
 
-SELECT * FROM `categories` JOIN  `products`
-    ON `products`.`category_sid`=`categories`.sid;
+SELECT MD5('123456'); -- e10adc3949ba59abbe56e057f20f883e
 
--- 別名
-SELECT p.*, c.name AS `分類名稱` FROM `products` AS p JOIN `categories` AS c
-    ON p.`category_sid`=c.sid;
+SELECT SHA1('123456'); -- 7c4a8d09ca3762af61e59520943dc26494f8941b
 
-SELECT p.*, c.name 分類名稱 FROM `products` p JOIN `categories` c
-    ON p.`category_sid`=c.sid;
+SELECT NOW(); -- 當下時間
+
+SELECT 1 FROM `categories`;
+
+SELECT *, `sid`*`sid` sq_sid FROM `categories`;
+
+SELECT p.*, c.name 
+    FROM `products` p 
+    LEFT JOIN `categories` c 
+        ON p.`category_sid`=c.sid
+    WHERE c.name IS NULL;  -- 判斷是不是空值
+
+SELECT p.*
+    FROM `products` p 
+    LEFT JOIN `categories` c 
+        ON p.`category_sid`=c.sid
+    WHERE c.name IS NOT NULL;
+
+SELECT * FROM `categories` WHERE parent_sid != 0;
+
+SELECT * FROM `categories` WHERE parent_sid <> 0;
 
 
-SELECT p.*, c.name FROM `products` p LEFT JOIN `categories` c
-    ON p.`category_sid`=c.sid;
+SELECT * FROM `products` WHERE `author`='平田豊';
+
+SELECT * FROM `products` WHERE `author` LIKE '平田%';
+
+SELECT * FROM `products` WHERE `author` LIKE '%陳%';
+
