@@ -7,12 +7,10 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-
-    echo 123 +456;
+<?php
+    echo 123 + 456;
     echo '<br>';
     print 100+23;
-    ?>
-    
+?>
 </body>
 </html>
