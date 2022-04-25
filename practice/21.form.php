@@ -23,7 +23,6 @@
             <label for="fav3">跑步</label><br>
 
         <button type="submit">送出</button>
-
     </form>
 </body>
 
