@@ -1,3 +1,7 @@
+<?php
+$title = '海獺的首頁';
+?>
+
 <?php include __DIR__ . '/parts/html-head.php' ?>
 <?php include __DIR__ . '/parts/navbar.php' ?>
 <div class="container"></div>
