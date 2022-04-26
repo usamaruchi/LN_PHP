@@ -34,8 +34,8 @@ if ($totalPages > 0) {
         exit;
     }
 
-    // 讀取分頁的資料
-    $sql = sprintf("SELECT * FROM address_book LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    // 讀取分頁的資料，ORDER BY sid DESC從後面新增的開始讀取
+    $sql = sprintf("SELECT * FROM address_book ORDER BY sid DESC LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
 
     $output['rows'] = $pdo->query($sql)->fetchAll();
 }
@@ -50,7 +50,16 @@ if ($totalPages > 0) {
         <div class="col">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=1">
+                            <i class="fa-solid fa-angles-left"></i>
+                        </a>
+                    </li>
+                    <li class="page-item <?= $page == 1 ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page - 1 ?>">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </a>
+                    </li>
                     <?php for ($i = $page - 3; $i <= $page + 3; $i++) : ?>
                     <?php if ($i >= 1 and $i <= $totalPages) : ?>
                     <li class="page-item <?= $page == $i ? 'active' : '' ?>">
@@ -58,7 +67,16 @@ if ($totalPages > 0) {
                     </li>
                     <?php endif; ?>
                     <?php endfor; ?>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                    <li class="page-item <?= $page == $totalPages ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $page + 1 ?>">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </a>
+                    </li>
+                    <li class="page-item <?= $page == $totalPages ? 'disabled' : '' ?>">
+                        <a class="page-link" href="?page=<?= $totalPages ?>">
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -82,7 +100,12 @@ if ($totalPages > 0) {
                 <td><?= $r['email'] ?></td>
                 <td><?= $r['mobile'] ?></td>
                 <td><?= $r['birthday'] ?></td>
-                <td><?= $r['address'] ?></td>
+
+                <td><?= htmlentities($r['address']) ?></td>
+
+                <!--
+                <td><?= strip_tags($r['address']) ?></td>
+                -->
             </tr>
             <?php endforeach; ?>
         </tbody>
